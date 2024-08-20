@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebController;
+use App\Http\Controllers\TailorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,11 @@ use App\Http\Controllers\WebController;
 
 // Corrected route
 Route::get('/', [WebController::class, 'index'])->name('homepage');
+Route::get('/choice', [WebController::class, 'regChoice'])->name('choice');
 
+
+Route::get('/register-tailor', [TailorController::class, 'showRegistrationForm'])->name('tailor.form');
+Route::post('/register-tailor', [TailorController::class, 'registerAsTailor'])->name('tailor.register');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

@@ -21,6 +21,12 @@ return new class extends Migration
             $table->rememberToken();
             $table->string("role")->default("customer");
             $table->string('image_path', 2048)->nullable();
+            $table->string('shop_address')->nullable();
+            $table->string('shop_timing')->nullable();
+            $table->string('experience')->nullable();
+            $table->bigInteger('alternate_number')->nullable();
+            $table->json('designs')->nullable();
+
             $table->timestamps();
         });
     }
