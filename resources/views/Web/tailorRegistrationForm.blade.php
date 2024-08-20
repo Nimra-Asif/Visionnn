@@ -19,51 +19,126 @@
     </head>
 
     <body>
-        <form
-            method="POST"
-            action="{{ route('tailor.register') }}"
-            enctype="multipart/form-data"
-        >
-            @csrf
+        <div class="container mt-5">
+            <!-- Display Validation Errors -->
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-            <div>
-                <label for="name">Name:</label>
-                <input type="text" name="name" required />
-            </div>
-            <div>
-                <label for="email">Email:</label>
-                <input type="email" name="email" required />
-            </div>
-            <div>
-                <label for="password">Password:</label>
-                <input type="password" name="password" required />
-            </div>
-            <div>
-                <label for="number">Number:</label>
-                <input type="number" name="number" required />
-            </div>
-            <div>
-                <label for="shop_address">Shop Address:</label>
-                <input type="text" name="shop_address" required />
-            </div>
-            <div>
-                <label for="shop_timing">Shop Timing:</label>
-                <input type="text" name="shop_timing" required />
-            </div>
-            <div>
-                <label for="experience">Experience:</label>
-                <input type="text" name="experience" required />
-            </div>
-            <div>
-                <label for="alternate_number">Alternate Number:</label>
-                <input type="text" name="alternate_number" />
-            </div>
-            <div>
-                <label for="designs">Upload Designs (minimum 5):</label>
-                <input type="file" name="designs[]" multiple required />
-            </div>
-            <button type="submit">Register as Tailor</button>
-        </form>
+            <form
+                method="POST"
+                action="{{ route('tailor.register') }}"
+                enctype="multipart/form-data"
+            >
+                @csrf
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <input
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        value="{{ old('name') }}"
+                        required
+                    />
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input
+                        type="email"
+                        name="email"
+                        class="form-control"
+                        value="{{ old('email') }}"
+                        required
+                    />
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password:</label>
+                    <input
+                        type="password"
+                        name="password"
+                        class="form-control"
+                        required
+                    />
+                </div>
+
+                <div class="mb-3">
+                    <label for="number" class="form-label">Number:</label>
+                    <input
+                        type="number"
+                        name="number"
+                        class="form-control"
+                        value="{{ old('number') }}"
+                        required
+                    />
+                </div>
+
+                <div class="mb-3">
+                    <label for="shop_address" class="form-label">Shop Address:</label>
+                    <input
+                        type="text"
+                        name="shop_address"
+                        class="form-control"
+                        value="{{ old('shop_address') }}"
+                        required
+                    />
+                </div>
+
+                <div class="mb-3">
+                    <label for="shop_timing" class="form-label">Shop Timing:</label>
+                    <input
+                        type="text"
+                        name="shop_timing"
+                        class="form-control"
+                        value="{{ old('shop_timing') }}"
+                        required
+                    />
+                </div>
+
+                <div class="mb-3">
+                    <label for="experience" class="form-label">Experience:</label>
+                    <input
+                        type="text"
+                        name="experience"
+                        class="form-control"
+                        value="{{ old('experience') }}"
+                        required
+                    />
+                </div>
+
+                <div class="mb-3">
+                    <label for="alternate_number" class="form-label">Alternate Number:</label>
+                    <input
+                        type="text"
+                        name="alternate_number"
+                        class="form-control"
+                        value="{{ old('alternate_number') }}"
+                    />
+                </div>
+
+                <div class="mb-3">
+                    <label for="designs" class="form-label">Upload Designs (minimum 5):</label>
+                    <input
+                        type="file"
+                        name="designs[]"
+                        class="form-control"
+                        multiple
+                        required
+                    />
+                </div>
+
+                <button type="submit" class="btn btn-primary">Register as Tailor</button>
+            </form>
+        </div>
+
         <!-- Bootstrap JavaScript Libraries -->
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

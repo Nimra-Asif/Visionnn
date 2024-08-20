@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\TailorController;
+use App\Http\Controllers\PackageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,12 @@ use App\Http\Controllers\TailorController;
 // Corrected route
 Route::get('/', [WebController::class, 'index'])->name('homepage');
 Route::get('/choice', [WebController::class, 'regChoice'])->name('choice');
+Route::get('/tailors', [WebController::class, 'showTailors'])->name('tailor.all');
 
 
+
+
+// tailor routes
 Route::get('/register-tailor', [TailorController::class, 'showRegistrationForm'])->name('tailor.form');
 Route::post('/register-tailor', [TailorController::class, 'registerAsTailor'])->name('tailor.register');
 Route::middleware([
@@ -30,4 +35,8 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    // packages routes
+Route::get('/packages', [PackageController::class, 'pkgForm'])->name('packages.page');
+Route::post('/packages', [PackageController::class, 'store'])->name('packages.store');
+Route::get('/tailors/{id}', [WebController::class, 'showTailorProfile'])->name('tailor.show');
 });
