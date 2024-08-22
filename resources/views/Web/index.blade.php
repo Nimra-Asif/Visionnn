@@ -298,7 +298,7 @@
                     class="wc-btn wc-btn-primary btn-text-flip"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                 >
-                    <span data-text="Logout">Logout</span>
+                    <span data-text="Logout">Logout <small class="text-danger">{{ Auth::User()->name }}</small></span>
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf

@@ -33,10 +33,31 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+       if(Auth::User()->role == "Tailor")
+       {
+        return view('tailor.dashboard');
+       }
+       else if(Auth::User()->role == "admin")
+       {
+        return view('admin.dashboard');
+       }
+       else
+       {
+        return view('web.index');
+       }
     })->name('dashboard');
     // packages routes
-Route::get('/packages', [PackageController::class, 'pkgForm'])->name('packages.page');
+    Route::get('/packages', function () {
+        $tailorId = auth()->user()->id;
+        $package = \App\Models\Packages::where('tailor_id', $tailorId)->first();
+    
+        if ($package) {
+            return redirect()->route('packages.edit')->with('error', 'You already added a package.');
+        }
+    
+        return view('packages.form');
+    })->name('packages.page');
 Route::post('/packages', [PackageController::class, 'store'])->name('packages.store');
 Route::get('/tailors/{id}', [WebController::class, 'showTailorProfile'])->name('tailor.show');
+Route::get('/editServices', [PackageController::class, 'editServices'])->name('packages.edit');
 });

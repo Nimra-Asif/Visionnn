@@ -34,4 +34,9 @@ class packageController extends Controller
 
         return redirect('/')->with('success', 'Package details saved successfully.');
     }
+
+    public function editServices()
+    {
+        return view('tailor/edit_services');
+    }
 }
